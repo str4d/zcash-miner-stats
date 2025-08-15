@@ -1,3 +1,4 @@
+from binascii import unhexlify
 import csv
 
 from slickrpc import Proxy
@@ -144,7 +145,25 @@ with open(FILENAME, 'a') as csvfile:
         block_data = rpc_connection.getblock(cur_block_hash)
         cb_data = rpc_connection.getrawtransaction(block_data['tx'][0], 1)
 
-        miner = ('', 0)
+        # Strip height pushdata from the coinbase script.
+        cb_script = cb_data['vin'][0]['coinbase']
+        height_len = ord(unhexlify(cb_script[:2]))
+        cb_script_end = unhexlify(cb_script[2*(1+height_len):])
+
+        # Extract any text data from the coinbase script.
+        miner_data = ''
+        while len(cb_script_end) > 0:
+            # Assumption: Miner data strings are appended to the coinbase script.
+            try:
+                decoded = cb_script_end.decode('utf8')
+                if decoded.isprintable():
+                    miner_data = decoded
+                    break
+            except UnicodeDecodeError:
+                pass
+            cb_script_end = cb_script_end[1:]
+
+        miner = ('', 0, miner_data)
         fr = []
         fs = []
         others = []
@@ -168,8 +187,8 @@ with open(FILENAME, 'a') as csvfile:
             # Assumption: the largest coinbase output goes to the mining pool.
             if value > miner[1]:
                 if miner[0]:
-                    others.append(miner)
-                miner = (addr, value)
+                    others.append((miner[0], miner[1]))
+                miner = (addr, value, miner_data)
             else:
                 others.append((addr, value))
 
@@ -180,7 +199,7 @@ with open(FILENAME, 'a') as csvfile:
             height,
             block_data['time'],
             netsolps,
-            '%s~%s' % miner,
+            '%s~%s~%s' % miner,
             '/'.join(['%s' % v for v in fr]),
             '/'.join(['%s' % v for v in fs]),
             '/'.join(['%s~%s' % other for other in others]),
