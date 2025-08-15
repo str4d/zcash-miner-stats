@@ -149,7 +149,10 @@ with open(FILENAME, 'a') as csvfile:
         fs = []
         others = []
         for vout in cb_data['vout']:
-            addr = '#'.join(vout['scriptPubKey']['addresses'])
+            if 'addresses' in vout['scriptPubKey']:
+                addr = '#'.join(vout['scriptPubKey']['addresses'])
+            else:
+                addr = 'UNKNOWN'
             value = vout['value']
             if addr in FR_ADDRS:
                 fr.append(value)
