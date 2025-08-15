@@ -62,6 +62,60 @@ FR_ADDRS = [
     "t3Pcm737EsVkGTbhsu2NekKtJeG92mvYyoN",
 ]
 
+DEV_FUND_ECC_ADDRESSES = [
+    't3LmX1cxWPPPqL4TZHx42HU3U5ghbFjRiif',
+    't3Toxk1vJQ6UjWQ42tUJz2rV2feUWkpbTDs',
+    't3ZBdBe4iokmsjdhMuwkxEdqMCFN16YxKe6',
+    't3ZuaJziLM8xZ32rjDUzVjVtyYdDSz8GLWB',
+    't3bAtYWa4bi8VrtvqySxnbr5uqcG9czQGTZ',
+    't3dktADfb5Rmxncpe1HS5BRS5Gcj7MZWYBi',
+    't3hgskquvKKoCtvxw86yN7q8bzwRxNgUZmc',
+    't3R1VrLzwcxAZzkX4mX3KGbWpNsgtYtMntj',
+    't3ff6fhemqPMVujD3AQurxRxTdvS1pPSaa2',
+    't3cEUQFG3KYnFG6qYhPxSNgGi3HDjUPwC3J',
+    't3WR9F5U4QvUFqqx9zFmwT6xFqduqRRXnaa',
+    't3PYc1LWngrdUrJJbHkYPCKvJuvJjcm85Ch',
+    't3bgkjiUeatWNkhxY3cWyLbTxKksAfk561R',
+    't3Z5rrR8zahxUpZ8itmCKhMSfxiKjUp5Dk5',
+    't3PU1j7YW3fJ67jUbkGhSRto8qK2qXCUiW3',
+    't3S3yaT7EwNLaFZCamfsxxKwamQW2aRGEkh',
+    't3eutXKJ9tEaPSxZpmowhzKhPfJvmtwTEZK',
+    't3gbTb7brxLdVVghSPSd3ycGxzHbUpukeDm',
+    't3UCKW2LrHFqPMQFEbZn6FpjqnhAAbfpMYR',
+    't3NyHsrnYbqaySoQqEQRyTWkjvM2PLkU7Uu',
+    't3QEFL6acxuZwiXtW3YvV6njDVGjJ1qeaRo',
+    't3PdBRr2S1XTDzrV8bnZkXF3SJcrzHWe1wj',
+    't3ZWyRPpWRo23pKxTLtWsnfEKeq9T4XPxKM',
+    't3he6QytKCTydhpztykFsSsb9PmBT5JBZLi',
+    't3VWxWDsLb2TURNEP6tA1ZSeQzUmPKFNxRY',
+    't3NmWLvZkbciNAipauzsFRMxoZGqmtJksbz',
+    't3cKr4YxVPvPBG1mCvzaoTTdBNokohsRJ8n',
+    't3T3smGZn6BoSFXWWXa1RaoQdcyaFjMfuYK',
+    't3gkDUe9Gm4GGpjMk86TiJZqhztBVMiUSSA',
+    't3eretuBeBXFHe5jAqeSpUS1cpxVh51fAeb',
+    't3dN8g9zi2UGJdixGe9txeSxeofLS9t3yFQ',
+    't3S799pq9sYBFwccRecoTJ3SvQXRHPrHqvx',
+    't3fhYnv1S5dXwau7GED3c1XErzt4n4vDxmf',
+    't3cmE3vsBc5xfDJKXXZdpydCPSdZqt6AcNi',
+    't3h5fPdjJVHaH4HwynYDM5BB3J7uQaoUwKi',
+    't3Ma35c68BgRX8sdLDJ6WR1PCrKiWHG4Da9',
+    't3LokMKPL1J8rkJZvVpfuH7dLu6oUWqZKQK',
+    't3WFFGbEbhJWnASZxVLw2iTJBZfJGGX73mM',
+    't3L8GLEsUn4QHNaRYcX3EGyXmQ8kjpT1zTa',
+    't3PgfByBhaBSkH8uq4nYJ9ZBX4NhGCJBVYm',
+    't3WecsqKDhWXD4JAgBVcnaCC2itzyNZhJrv',
+    't3ZG9cSfopnsMQupKW5v9sTotjcP5P6RTbn',
+    't3hC1Ywb5zDwUYYV8LwhvF5rZ6m49jxXSG5',
+    't3VgMqDL15ZcyQDeqBsBW3W6rzfftrWP2yB',
+    't3LC94Y6BwLoDtBoK2NuewaEbnko1zvR9rm',
+    't3cWCUZJR3GtALaTcatrrpNJ3MGbMFVLRwQ',
+    't3YYF4rPLVxDcF9hHFsXyc5Yq1TFfbojCY6',
+    't3XHAGxRP2FNfhAjxGjxbrQPYtQQjc3RCQD',
+]
+DEV_FUND_ZF_ADDRESS = 't3dvVE3SQEi7kqNzwrfNePxZ1d4hUyztBA1'
+DEV_FUND_MG_ADDRESS = 't3XyYW8yBFRuMnfvm5KLGFbEVz25kckZXym'
+DEV_FUND_FPF_ADDRESS = 't3cFfPt1Bcvgez9ZbMBFWeZsskxTkPzGCow'
+
 # Block height 1 (genesis block coinbase details can't be accessed)
 cur_block_hash = '0007bc227e1c57a4a70e237cad00e7b7ce565155ab49166bc57397a26d339283'
 
@@ -92,6 +146,7 @@ with open(FILENAME, 'a') as csvfile:
 
         miner = ('', 0)
         fr = []
+        fs = []
         others = []
         for vout in cb_data['vout']:
             addr = '#'.join(vout['scriptPubKey']['addresses'])
@@ -99,6 +154,15 @@ with open(FILENAME, 'a') as csvfile:
             if addr in FR_ADDRS:
                 fr.append(value)
                 continue
+            elif (
+                addr in DEV_FUND_ECC_ADDRESSES or
+                addr == DEV_FUND_ZF_ADDRESS or
+                addr == DEV_FUND_MG_ADDRESS or
+                addr == DEV_FUND_FPF_ADDRESS
+            ):
+                fs.append(value)
+                continue
+            # Assumption: the largest coinbase output goes to the mining pool.
             if value > miner[1]:
                 if miner[0]:
                     others.append(miner)
@@ -115,6 +179,7 @@ with open(FILENAME, 'a') as csvfile:
             netsolps,
             '%s~%s' % miner,
             '/'.join(['%s' % v for v in fr]),
+            '/'.join(['%s' % v for v in fs]),
             '/'.join(['%s~%s' % other for other in others]),
         ])
 
