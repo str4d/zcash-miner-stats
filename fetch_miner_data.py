@@ -1,5 +1,6 @@
-from bitcoinrpc.authproxy import AuthServiceProxy, JSONRPCException
 import csv
+
+from slickrpc import Proxy
 try:
     import progressbar
 except:
@@ -64,7 +65,7 @@ FR_ADDRS = [
 # Block height 1 (genesis block coinbase details can't be accessed)
 cur_block_hash = '0007bc227e1c57a4a70e237cad00e7b7ce565155ab49166bc57397a26d339283'
 
-rpc_connection = AuthServiceProxy("http://%s:%s@127.0.0.1:8232" % (USERNAME, PASSWORD))
+rpc_connection = Proxy("http://%s:%s@127.0.0.1:8232" % (USERNAME, PASSWORD))
 
 # Work out where we should start
 try:
